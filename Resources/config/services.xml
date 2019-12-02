@@ -7,7 +7,7 @@
     <parameters>
         <parameter key="css_to_inline_email_converter.class">RobertoTru\ToInlineStyleEmailBundle\Converter\ToInlineStyleEmailConverter</parameter>
         <parameter key="css_to_inline_email_twig_extension.class">RobertoTru\ToInlineStyleEmailBundle\Twig\InlineCssExtension</parameter>
-        <parameter key="css_to_inline_email_twig_extension.web_root">%kernel.root_dir%/../web</parameter>
+        <parameter key="css_to_inline_email_twig_extension.web_root">%kernel.project_dir%/../public</parameter>
     </parameters>
 
     <services>
