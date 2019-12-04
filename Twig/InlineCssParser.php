@@ -12,11 +12,11 @@
 namespace RobertoTru\ToInlineStyleEmailBundle\Twig;
 
 use Symfony\Component\Config\FileLocatorInterface;
-use Symfony\Component\Templating\TemplateNameParserInterface;
-use Twig_Node;
-use Twig_Token;
+use Twig\Node;
+use Twig\Token;
+use Twig\TokenParser\AbstractTokenParser;
 
-class InlineCssParser extends \Twig_TokenParser
+class InlineCssParser extends AbstractTokenParser
 {
     /**
      * @var FileLocatorInterface
@@ -48,22 +48,22 @@ class InlineCssParser extends \Twig_TokenParser
     /**
      * Parses a token and returns a node.
      *
-     * @param Twig_Token $token A Twig_Token instance
+     * @param Twig\Token $token A Twig\Token instance
      *
-     * @return Twig_Node A Twig_Node instance
+     * @return Twig\Node A Twig_Node instance
      */
-    public function parse(Twig_Token $token)
+    public function parse(Token $token)
     {
         $lineNo = $token->getLine();
         $stream = $this->parser->getStream();
-        if ($stream->test(Twig_Token::STRING_TYPE)) {
-            $css = $this->resolvePath($stream->expect(Twig_Token::STRING_TYPE)->getValue());
+        if ($stream->test(Token::STRING_TYPE)) {
+            $css = $this->resolvePath($stream->expect(Token::STRING_TYPE)->getValue());
         } else {
             $css = $this->parser->getExpressionParser()->parseExpression();
         }
-        $stream->expect(Twig_Token::BLOCK_END_TYPE);
+        $stream->expect(Token::BLOCK_END_TYPE);
         $body = $this->parser->subparse(array($this, 'decideEnd'), true);
-        $stream->expect(Twig_Token::BLOCK_END_TYPE);
+        $stream->expect(Token::BLOCK_END_TYPE);
 
         return new InlineCssNode($body, $css, $lineNo, $this->debug);
     }
@@ -78,7 +78,7 @@ class InlineCssParser extends \Twig_TokenParser
         return 'inlinecss';
     }
 
-    public function decideEnd(Twig_Token $token)
+    public function decideEnd(Token $token)
     {
         return $token->test('endinlinecss');
     }

@@ -20,7 +20,7 @@
     "require-dev": {
         "symfony/framework-bundle": "*",
         "phpunit/phpunit": "^4.4",
-        "twig/twig": "*"
+        "twig/twig": "^3.0"
     },
     "autoload": {
         "psr-4": { "RobertoTru\\ToInlineStyleEmailBundle\\": "" }
