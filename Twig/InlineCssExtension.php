@@ -64,7 +64,7 @@ class InlineCssExtension extends AbstractExtension implements TwigExtensionGloba
     /**
      * {@inheritDoc}
      */
-    public function getGlobals()
+    public function getGlobals(): array
     {
         return array(
             'inlinecss' => $this->inlineCss,
